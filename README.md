@@ -43,40 +43,6 @@ python eval_real.py --model-folder runs  --eval-datafolder /media/marco/ubuntu_d
 ```
 
 
-
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/rvt-2-learning-precise-manipulation-from-few/robot-manipulation-on-rlbench)](https://paperswithcode.com/sota/robot-manipulation-on-rlbench?p=rvt-2-learning-precise-manipulation-from-few)
-
-[***RVT-2: Learning Precise Manipulation from Few Examples***](https://robotic-view-transformer-2.github.io/) <br/>
-[Ankit Goyal](http://imankgoyal.github.io), [Valts Blukis](https://www.cs.cornell.edu/~valts/), [Jie Xu](https://people.csail.mit.edu/jiex), [Yijie Guo](https://www.guoyijie.me/), [Yu-Wei Chao](https://research.nvidia.com/person/yu-wei-chao), [Dieter Fox](https://homes.cs.washington.edu/~fox/)<br/>
-***RSS 2024***
-
-[***RVT: Robotic View Transformer for 3D Object Manipulation***](https://robotic-view-transformer.github.io/) <br/>
-[Ankit Goyal](http://imankgoyal.github.io), [Jie Xu](https://people.csail.mit.edu/jiex), [Yijie Guo](https://www.guoyijie.me/), [Valts Blukis](https://www.cs.cornell.edu/~valts/), [Yu-Wei Chao](https://research.nvidia.com/person/yu-wei-chao), [Dieter Fox](https://homes.cs.washington.edu/~fox/)<br/>
-***CoRL 2023 (Oral)***
-
-<!-- <div style="display:flex">
-    <div style="flex:1;padding-right:5px;">
-        <img src="https://robotic-view-transformer-2.github.io/figs/teaser.gif" alt="RVT-2" height="200px"/>
-        <p style="text-align:center;">RVT-2 solving high precision tasks</p>
-    </div>
-    <div style="flex:1;padding-left:5px;">
-        <img src="https://robotic-view-transformer.github.io/real_world/real_world_very_small.gif" alt="RVT" height="200px"/>
-        <p style="text-align:center;">Single RVT model model solving multiple tasks</p>
-    </div>
-</div> -->
-
-<p float="left">
-  <img src="https://robotic-view-transformer-2.github.io/figs/teaser.gif" alt="RVT-2" height="200px"/>
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="https://robotic-view-transformer.github.io/real_world/real_world_very_small.gif" alt="RVT" height="200px"/>
- <br>
- <p>RVT-2 solving high precision tasks &nbsp; &nbsp; &nbsp;  Single RVT solving multiple tasks</p>
-</p>
-
-This is the official repository that reproduces the results for [RVT-2](https://robotic-view-transformer-2.github.io/) and [RVT](https://robotic-view-transformer.github.io/). The repository is backward compatible. So you just need to pull the latest commit and can switch from RVT to RVT-2!
-
-
-
 ## Getting Started
 
 ### Install
@@ -228,32 +194,6 @@ pip install 'git+https://github.com/facebookresearch/pytorch3d.git@stable'
 
 - If you want to generate visualization videos, please refer to https://github.com/NVlabs/RVT/issues/5.
 
-## FAQ's
-###### Q. What is the advantag of RVT-2 and RVT over PerAct?
-RVT's are both faster to train and performs better than PerAct. <br>
-<img src="https://robotic-view-transformer-2.github.io/figs/plot.png" align="center" width="30%"/>
-
-###### Q. What resources are required to train RVT?
-For training on 18 RLBench tasks, with 100 demos per task, we use 8 V100 GPUs (16 GB memory each). The model trains in ~1 day. 
-
-Note that for fair comparison with PerAct, we used the same dataset, which means [duplicate keyframes are loaded into the replay buffer](https://github.com/peract/peract#why-are-duplicate-keyframes-loaded-into-the-replay-buffer). For other datasets, one could consider not doing so, which might further speed up training.
-
-###### Q. Why do you use `pe_fix=True` in the rvt [config](https://github.com/NVlabs/RVT/blob/master/rvt/mvt/config.py#L32)?
-For fair comparison with offical PerAct model, we use this setting. More detials about this can be found in PerAct [code](https://github.com/peract/peract/blob/main/agents/peract_bc/perceiver_lang_io.py#L387-L398). For future, we recommend using `pe_fix=False` for language input.
-
-###### Q. Why are the results for PerAct different from the PerAct paper?
-In the PerAct paper, for each task, the best checkpoint is chosen based on the validation set performance. Hence, the model weights can be different for different tasks. We evaluate PerAct and RVT only on the final checkpoint, so that all tasks are strictly evaluated on the same model weights. Note that only the final model for PerAct has been released officially.
-
-###### Q. Why is there a variance in performance on RLBench even when evaluting the same checkpoint?
-We hypothesize that it is because of the sampling based planner used in RLBench, which could be the source of the randomization. Hence, we evaluate each checkpoint 5 times and report mean and variance.
-
-###### Q. Why did you use a cosine decay learning rate scheduler instead of a fixed learning rate schedule as done in PerAct?
-We found the cosine learning rate scheduler led to faster convergence for RVT. Training PerAct with our training hyper-parameters (cosine learning rate scheduler and same number of iterations) led to worse performance (in ~4 days of training time). Hence for Fig. 1, we used the official hyper-parameters for PerAct.
-
-###### Q. For my use case, I want to render images at real camera locations (input camera poses) with PyTorch3D. Is it possible to do so and how can I do that?
-Yes, it is possible to do so. A self-sufficient example is present [here](https://github.com/NVlabs/RVT/issues/9). Depending on your use case, the code may need be modified. Also note that 3D augmentation cannot be used while rendering images at real camera locations as it would change the pose of the camera with respect to the point cloud.
-
-For questions and comments, please contact [Ankit Goyal](https://imankgoyal.github.io/).
 
 ## Acknowledgement
 We sincerely thank the authors of the following repositories for sharing their code.
