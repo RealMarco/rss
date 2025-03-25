@@ -204,8 +204,3 @@ We sincerely thank the authors of the following repositories for sharing their c
 - [RLBench](https://github.com/stepjam/RLBench/tree/master)
 - [YARR](https://github.com/stepjam/YARR)
 
-## License
-License Copyright © 2023, NVIDIA Corporation & affiliates. All rights reserved.
-
-This work is made available under the [Nvidia Source Code License](https://github.com/NVlabs/RVT/blob/master/LICENSE).
-The pretrained RVT models are released under the CC-BY-NC-SA-4.0 license.
